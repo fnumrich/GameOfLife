@@ -11,8 +11,7 @@ class Generation(val aliveCells: Set[Cell] = Set.empty) {
 	
 	def next: Generation = {
 		val stayingAlive  = aliveCells filter { 2 to 3 contains aliveNeighbours(_).size }
-		val stayingAlive1 = aliveCells filter { cell => 2 to 3 contains aliveNeighbours(cell).size }
-		val wakingFromDead = 
+		val wakingFromDead = aliveCells flatMap deadNeighbours filter { aliveNeighbours(_).size == 3 }
 		new Generation(stayingAlive ++ wakingFromDead)
 	}
 }
